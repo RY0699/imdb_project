@@ -12,6 +12,8 @@ function App() {
             <a href="/">Graph 1</a>
             <a href="/">Graph 2</a>
             <a href="/">Graph 3</a>
+            <a href="/">Graph 4</a>
+            <a href="/">Graph 5</a>
           </Navigation>
         </Header>
         <Drawer>
@@ -19,6 +21,8 @@ function App() {
             <a href="/">Graph 1</a>
             <a href="/">Graph 2</a>
             <a href="/">Graph 3</a>
+            <a href="/">Graph 4</a>
+            <a href="/">Graph 5</a>
           </Navigation>
         </Drawer>
         <Content>

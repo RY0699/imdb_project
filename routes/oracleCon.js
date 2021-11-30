@@ -1,8 +1,6 @@
 const oracledb = require('oracledb');
 const dbconfig = require('./dbconfig.js');
 
-const router = require('express').Router();
-
 async function run() {
 
 let connection;
@@ -15,15 +13,12 @@ try {
 
     console.log("Successfully connected to Oracle Database")
 
-    connection.execute(
-        //Statement to execute
-    );
-}   catch (err) {
-    console.error(err);
+   
 } finally {
     if (connection) {
         try {
             await connection.close();
+            console.log("Successfully closed connection")
         } catch (err) {
             console.error(err);
         }
