@@ -9,20 +9,20 @@ function App() {
       <Layout>
         <Header title="IMDB Project" scroll>
           <Navigation>
-            <a href="/">Graph 1</a>
-            <a href="/">Graph 2</a>
-            <a href="/">Graph 3</a>
-            <a href="/">Graph 4</a>
-            <a href="/">Graph 5</a>
+            <Link to="/graphone">Graph 1</Link>
+            <Link to="/graphtwo">Graph 2</Link>
+            <Link to="/graphthree">Graph 3</Link>
+            <Link to="/graphfour">Graph 4</Link>
+            <Link to="/graphfive">Graph 5</Link>
           </Navigation>
         </Header>
         <Drawer>
         <Navigation>
-            <a href="/">Graph 1</a>
-            <a href="/">Graph 2</a>
-            <a href="/">Graph 3</a>
-            <a href="/">Graph 4</a>
-            <a href="/">Graph 5</a>
+            <Link to="/graphone">Graph 1</Link>
+            <Link to="/graphtwo">Graph 2</Link>
+            <Link to="/graphthree">Graph 3</Link>
+            <Link to="/graphfour">Graph 4</Link>
+            <Link to="/graphfive">Graph 5</Link>
           </Navigation>
         </Drawer>
         <Content>

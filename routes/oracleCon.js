@@ -12,7 +12,18 @@ try {
     });
 
     console.log("Successfully connected to Oracle Database")
+    connection.execute(
+        "select rohityerramsetty.title.startYear, avg(averagerating) from dkanchanapalli.ratings JOIN rohityerramsetty.title ON ratings.tconst = rohityerramsetty.title.tconst WHERE ratings.tconst in (SELECT tconst FROM rohityerramsetty.title where genres like '%Comedy%') group by rohityerramsetty.title.startYear order by rohityerramsetty.title.startYear",
 
+        function(err, result)
+        {
+            if(err) {
+                console.error(err.message);
+                return;
+            }
+            console.log(result.metaData);
+            console.log(result.rows);
+        });
    
 } finally {
     if (connection) {
