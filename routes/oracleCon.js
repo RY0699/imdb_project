@@ -13,7 +13,7 @@ try {
 
     console.log("Successfully connected to Oracle Database")
     connection.execute(
-        "select rohityerramsetty.title.startYear, avg(averagerating) from dkanchanapalli.ratings JOIN rohityerramsetty.title ON ratings.tconst = rohityerramsetty.title.tconst WHERE ratings.tconst in (SELECT tconst FROM rohityerramsetty.title where genres like '%Comedy%') group by rohityerramsetty.title.startYear order by rohityerramsetty.title.startYear",
+        "select CAST(rohityerramsetty.title.startYear as INTEGER), avg(averagerating) from dkanchanapalli.ratings Join rohityerramsetty.title on dkanchanapalli.ratings.tconst = rohityerramsetty.title.tconst where ratings.tconst in (select tconst from rohityerramsetty.title where genres like '%Comedy%') group by rohityerramsetty.title.startYear order by rohityerramsetty.title.startYear",
 
         function(err, result)
         {

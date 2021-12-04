@@ -10,7 +10,9 @@ import GraphFive from "./components/graphfive";
 const Main = () => (
 <Switch>
     <Route exact path="/" component={Landing} />
-    <Route path="/graphone" component={GraphOne} />
+    <Route path="/graphone" component={GraphOne}>
+    <GraphOne/>
+    </Route>
     <Route path="/graphtwo" component={GraphTwo} />
     <Route path="/graphthree" component={GraphThree}/>
     <Route path ="/graphfour" component={GraphFour}/>
