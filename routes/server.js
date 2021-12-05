@@ -52,7 +52,7 @@ app.post('/genreratings', function(req, res) {
                             console.error(err.message);
                         }
                         else {
-                            console.log("GET /genreratings : Connection released");
+                            console.log("POST /genreratings : Connection released");
                         }
                     });
                 });
@@ -61,7 +61,7 @@ app.post('/genreratings', function(req, res) {
 
     //Graph 1.2
 
-app.get('/genreRatingsSeries', function(req, res) {
+app.post('/genreRatingsSeries', function(req, res) {
     "use strict";
     oracledb.getConnection(connectionAttributes, function (err, connection) {
         if (err) {
@@ -73,14 +73,8 @@ app.get('/genreRatingsSeries', function(req, res) {
             }));
             return;
         }
-
-        connection.execute("select CAST(rohityerramsetty.title.startYear as INTEGER), round(avg(averagerating),5) AS averagerating "+
-        "from dkanchanapalli.ratings JOIN rohityerramsetty.title "+ 
-        "ON ratings.tconst = rohityerramsetty.title.tconst "+
-        "WHERE ratings.tconst in "+
-        "(SELECT tconst FROM rohityerramsetty.title where genres like '%Comedy%' and (titleType = 'tvSeries' or titletype = 'tvMiniSeries')) "+
-        "group by rohityerramsetty.title.startYear "+
-        "order by rohityerramsetty.title.startYear", {}, {
+        const genre = req.body.genre;
+        connection.execute(`select CAST(rohityerramsetty.title.startYear as INTEGER) AS startyear, round(avg(averagerating),5) AS averagerating from dkanchanapalli.ratings JOIN rohityerramsetty.title ON ratings.tconst = rohityerramsetty.title.tconst WHERE ratings.tconst in (SELECT tconst FROM rohityerramsetty.title where genres like '%${genre}%' and (titleType = 'tvSeries' or titletype = 'tvMiniSeries')) group by rohityerramsetty.title.startYear order by rohityerramsetty.title.startYear`, {}, {
             outFormat: oracledb.OBJECT //result as oject
         }, function(err, result) {
             if (err) {
@@ -101,7 +95,7 @@ app.get('/genreRatingsSeries', function(req, res) {
                             console.error(err.message);
                         }
                         else {
-                            console.log("GET /genreratings : Connection released");
+                            console.log("POST /genreRatingsSeries : Connection released");
                         }
                     });
                 });
