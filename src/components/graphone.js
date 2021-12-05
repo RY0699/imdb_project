@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, Component } from 'react'
 import { Line } from 'react-chartjs-2'
 import {Chart, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js'
+import Select from 'react-select'
 import axios from 'axios'
 
 Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
@@ -10,10 +11,32 @@ const GraphOne = () => {
   const [chartData, setChartData] = useState({});
   const [startYear, setStartYear] = useState([]);
   const [averageRatings, setAverageRatings] = useState([]);
+  const data = [
+    {
+      value: 1,
+      label: 'Romance'
+    },
+    {
+      value: 2,
+      label: 'Comedy'
+    },
+    {
+      value: 3,
+      label: 'Horror'
+    }
+  ]
+  const [selectedValue, setSelectValue] = useState(null);
+  const handleChange = obj => {
+    setSelectValue(obj.label);
+  }
+
 
   let year = [];
   let ratings = [];
-  axios.get("http://localhost:3000/genreratings").then(res => {
+
+  axios.post("http://localhost:3000/genreratings", {
+    genre: selectedValue
+  }).then(res => {
     console.log(res)
     for(const dataObj of res.data) {
       year.push(dataObj.STARTYEAR)
@@ -23,11 +46,15 @@ const GraphOne = () => {
   .catch(err => {
     console.log(err)
   });
+
+
   
-  console.log(year)
-  console.log(ratings)
   return (
-    <div> 
+    <div>
+      <Select
+      value = {selectedValue}
+      options={data}
+      onChange={handleChange}/>   
       <Line
         data={{
           labels: year,
@@ -59,8 +86,13 @@ const GraphOne = () => {
         height={400}
         width={600}
         options={{
-          maintainAspectRatio: false,
+          maintainAspectRatio: true,
+          aspectRatio: 3,
+          responsive: true,
           scales: {
+            xAxes: [{
+            }
+            ],
             yAxes: [
               {
                 ticks: {
@@ -76,7 +108,7 @@ const GraphOne = () => {
           },
         }}
       />
-    </div>
+      </div>
   )
 }
 
