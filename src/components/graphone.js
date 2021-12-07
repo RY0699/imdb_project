@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react'
+import React, { useState } from 'react'
 import { Line } from 'react-chartjs-2'
 import {Chart, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js'
 import Select from 'react-select'
@@ -8,9 +8,7 @@ Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Too
 
 
 const GraphOne = () => {
-  const [chartData, setChartData] = useState({});
-  const [startYear, setStartYear] = useState([]);
-  const [averageRatings, setAverageRatings] = useState([]);
+
   const data = [
     {
       value: 1,
@@ -165,7 +163,7 @@ const GraphOne = () => {
         width={600}
         options={{
           maintainAspectRatio: true,
-          aspectRatio: 3,
+          aspectRatio: 8,
           responsive: true,
           scales: {
             xAxes: [{
@@ -223,7 +221,7 @@ const GraphOne = () => {
         width={600}
         options={{
           maintainAspectRatio: true,
-          aspectRatio: 3,
+          aspectRatio: 8,
           responsive: true,
           scales: {
             xAxes: [{
